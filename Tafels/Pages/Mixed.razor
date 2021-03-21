@@ -1,6 +1,8 @@
 @page "/Mixed"
 @inject SumService SumService
 
+<NavLink class="button is-pulled-right" href="/"><span class="icon"><Icon Name="IconName.Home" /></span></NavLink>
+
 <h1 class="title">Tafels door elkaar</h1>
 
 @if (_inGame == false)
@@ -32,7 +34,7 @@ else
             <span>De tafels van @string.Join(" en ", _tables) door elkaar</span>
         }
 
-        <Quiz Sums="_sums"/>
+        <Quiz Round="@_round" Done="@QuizDone" Check="@(_ => _round.ShowResults = true)"/>
     </p>
 }
 
@@ -40,16 +42,25 @@ else
     private List<int> _tables = new();
     private bool _inGame;
 
-    private List<Sum> _sums;
+    private Round _round;
 
     void TablesChanged(List<int> tables)
     {
         _tables = tables;
     }
 
+    void QuizDone()
+    {
+        _round.ShowResults = false;
+        StartGame();
+    }
+
     private void StartGame()
     {
-        _sums = SumService.Generate(5, _tables);
+        _round = new Round
+        {
+            Sums = SumService.Generate(5, _tables)
+        };
         _inGame = true;
     }
 

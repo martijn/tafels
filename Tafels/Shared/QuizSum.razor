@@ -1,10 +1,10 @@
 <p class="is-size-2">
     <span>@Sum.A</span>
-    <span>×</span>
+    <span class="o">×</span>
     <span>@Sum.B</span>
-    <span>=</span>
+    <span class="o">=</span>
     <span>
-        <input type="text" class="input is-large @InputClass" @bind="_answer" />
+        <input type="text" inputmode="numeric" class="input is-large @InputClass" @bind="Sum.UserAnswer"/>
     </span>
 </p>
 
@@ -16,9 +16,7 @@
     [Parameter]
     public Sum Sum { get; set; }
 
-    private int? _answer = null;
-
     private string InputClass =>
-        ShowResult && _answer == Sum.Answer ? "is-success" : "";
+        ShowResult && Sum.Correct ? "is-success" : "";
 
 }

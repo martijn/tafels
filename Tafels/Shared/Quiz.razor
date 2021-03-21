@@ -1,14 +1,35 @@
-@foreach (var sum in Sums)
+@foreach (var sum in Round.Sums)
 {
-    <QuizSum Sum="@sum" ShowResult="@_showResult"/>
+    <QuizSum Sum="@sum" ShowResult="@Round.ShowResults"/>
 }
 
-<button class="button is-large is-success" @onclick="(_ => _showResult = true)">Controleren</button>
+@if (Round.ShowResults)
+{
+    @if (Round.Sums.Any(s => !s.Correct))
+    {
+        <p class="notification">Bijna goed, verbeter je fouten om door te gaan!</p>
+        <button class="button is-large is-link" @onclick="Check">Controleren</button>
+    }
+    else
+    {
+        <p class="notification is-success is-light">Goed gedaan! Klik op de groene knop om door te gaan!</p>
+        <button class="button is-large is-success" @onclick="Done">Volgende ronde</button>
+    }
+}
+else
+{
+    <button class="button is-large is-link" @onclick="Check">Controleren</button>
+}
 
 @code {
-    private bool _showResult = false;
 
     [Parameter]
-    public List<Sum> Sums { get; set; }
+    public EventCallback Check { get; set; }
+
+    [Parameter]
+    public EventCallback Done { get; set; }
+
+    [Parameter]
+    public Round Round { get; set; }
 
 }

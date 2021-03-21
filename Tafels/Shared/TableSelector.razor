@@ -1,9 +1,9 @@
-<div class="field is-grouped buttons are-large">
+<div class="field buttons are-large">
     <p class="control">
         @for (var i = 1; i < 13; i++)
         {
             var buttonNumber = i;
-            var css = selectedTables.Contains(buttonNumber) ? "button is-info" : "button";
+            var css = _selectedTables.Contains(buttonNumber) ? "button is-info" : "button";
             <button class="@css" @onclick="_ => Toggle(buttonNumber)">
                 @buttonNumber
             </button>
@@ -12,24 +12,24 @@
 </div>
 
 @code {
-    private List<int> selectedTables = new();
+    private List<int> _selectedTables = new();
 
     [Parameter]
     public EventCallback<List<int>> OnChange { get; set; }
 
     void Toggle(int table)
     {
-        if (selectedTables.Contains(table))
+        if (_selectedTables.Contains(table))
         {
-            selectedTables.Remove(table);
+            _selectedTables.Remove(table);
         }
         else
         {
-            selectedTables.Add(table);
+            _selectedTables.Add(table);
         }
 
-        selectedTables.Sort();
-        OnChange.InvokeAsync(selectedTables);
+        _selectedTables.Sort();
+        OnChange.InvokeAsync(_selectedTables);
     }
 
 }

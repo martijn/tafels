@@ -8,8 +8,12 @@ p span {
     width: 1.25em;
 }
 
+p span.o {
+    width: 1em;
+}
+
 input[type="text"] {
-    min-width: 3em;
+    min-width: 4em;
     text-align: center;
 }
 
