@@ -1,0 +1,14 @@
+@foreach (var sum in Sums)
+{
+    <QuizSum Sum="@sum" ShowResult="@_showResult"/>
+}
+
+<button class="button is-large is-success" @onclick="(_ => _showResult = true)">Controleren</button>
+
+@code {
+    private bool _showResult = false;
+
+    [Parameter]
+    public List<Sum> Sums { get; set; }
+
+}

@@ -1,0 +1,24 @@
+<p class="is-size-2">
+    <span>@Sum.A</span>
+    <span>×</span>
+    <span>@Sum.B</span>
+    <span>=</span>
+    <span>
+        <input type="text" class="input is-large @InputClass" @bind="_answer" />
+    </span>
+</p>
+
+@code {
+
+    [Parameter]
+    public bool ShowResult { get; set; }
+
+    [Parameter]
+    public Sum Sum { get; set; }
+
+    private int? _answer = null;
+
+    private string InputClass =>
+        ShowResult && _answer == Sum.Answer ? "is-success" : "";
+
+}

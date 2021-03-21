@@ -6,6 +6,7 @@ using Blazorise.Bulma;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Tafels.Services;
 
 namespace Tafels
 {
@@ -23,6 +24,8 @@ namespace Tafels
 
             builder.Services.AddScoped(
                 sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
+
+            builder.Services.AddSingleton<SumService>();
 
             await builder.Build().RunAsync();
         }

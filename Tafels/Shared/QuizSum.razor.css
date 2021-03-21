@@ -1,0 +1,18 @@
+p {
+    margin: .5em 0;
+}
+
+p span {
+    display: inline-block;
+    text-align: center;
+    width: 1.25em;
+}
+
+input[type="text"] {
+    min-width: 3em;
+    text-align: center;
+}
+
+input[type="text"].is-success {
+    background: #e6f7ef;
+}

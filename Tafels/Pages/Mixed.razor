@@ -1,0 +1,56 @@
+@page "/Mixed"
+@inject SumService SumService
+
+<h1 class="title">Tafels door elkaar</h1>
+
+@if (_inGame == false)
+{
+    <p class="subtitle">Welke tafels wil je oefenen?</p>
+
+    <TableSelector OnChange="@TablesChanged"/>
+
+    @if (_tables.Count == 0)
+    {
+        <p>Kies een of meer tafels om te beginnen!</p>
+    }
+    else
+    {
+        <p>
+            <button class="button is-success is-large" @onclick="StartGame">Start</button>
+        </p>
+    }
+}
+else
+{
+    <p class="subtitle">
+        @if (_tables.Count == 1)
+        {
+            <span>De tafel van @_tables.First() door elkaar</span>
+        }
+        else
+        {
+            <span>De tafels van @string.Join(" en ", _tables) door elkaar</span>
+        }
+
+        <Quiz Sums="_sums"/>
+    </p>
+}
+
+@code {
+    private List<int> _tables = new();
+    private bool _inGame;
+
+    private List<Sum> _sums;
+
+    void TablesChanged(List<int> tables)
+    {
+        _tables = tables;
+    }
+
+    private void StartGame()
+    {
+        _sums = SumService.Generate(5, _tables);
+        _inGame = true;
+    }
+
+}
