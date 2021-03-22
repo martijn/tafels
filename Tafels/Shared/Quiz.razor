@@ -1,3 +1,5 @@
+@using BlafettisLib
+
 @foreach (var sum in Round.Sums)
 {
     @if (sum == Round.Sums.FirstOrDefault(s => !s.Correct))
@@ -9,6 +11,8 @@
         <QuizSum @key="sum" Sum="@sum" ShowResult="@Round.ShowResults"/>
     }
 }
+
+<Blafettis @ref="Blafettis" angle="70"/>
 
 @if (Round.ShowResults)
 {
@@ -38,13 +42,24 @@ else
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
+    private bool _confettiFired = false;
 
+    private Blafettis Blafettis;
     private QuizSum _firstSum;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && !Round.Completed && _firstSum is not null)
             await _firstSum.Focus();
+
+        if (Round.ShowResults && !Round.Completed)
+            Round.MistakesWereMade = true; // TODO Lift into class?
+        
+        if (Round.Completed && !Round.MistakesWereMade && !_confettiFired)
+        {
+            _confettiFired = true;
+            Blafettis.RaiseConfetti();
+        }
     }
 
 }

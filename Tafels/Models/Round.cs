@@ -9,5 +9,7 @@ namespace Tafels.Models
         public bool ShowResults { get; set; }
 
         public bool Completed => Sums.All(s => s.Correct);
+
+        public bool MistakesWereMade { get; set; } = false;
     }
 }
