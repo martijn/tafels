@@ -16,7 +16,7 @@
 {
     <h2 class="title">De tafel van @_table</h2>
 
-    <Quiz Round="@_round" Check="@(_ => _round.ShowResults = true)">
+    <Quiz @key="@_round" Round="@_round" Check="@(_ => _round.ShowResults = true)">
         <p class="notification is-success is-light">Helemaal goed. Kies de volgende tafel of begin opnieuw!</p>
         <button class="button is-large is-success" @onclick="NewRound">Opnieuw</button>
     </Quiz>
