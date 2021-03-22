@@ -1,0 +1,46 @@
+@page "/Single"
+
+<NavLink class="button is-pulled-right" href="/">
+    <span class="icon">
+        <Icon Name="IconName.Home"/>
+    </span>
+</NavLink>
+
+<h1 class="title">Eén tafel</h1>
+
+<p class="subtitle">Kies een tafel om te oefenen</p>
+
+<TableSelector OnChange="@TablesChanged" Single="true"/>
+
+@if (_table is not null)
+{
+    <h2 class="title">De tafel van @_table</h2>
+
+    <Quiz Round="@_round" Check="@(_ => _round.ShowResults = true)">
+        <p class="notification is-success is-light">Helemaal goed. Kies de volgende tafel of begin opnieuw!</p>
+        <button class="button is-large is-success" @onclick="NewRound">Opnieuw</button>
+    </Quiz>
+}
+
+@code {
+    private int? _table;
+    private Round _round;
+
+    private async Task TablesChanged(List<int> tables)
+    {
+        _table = tables.FirstOrDefault();
+        await NewRound();
+    }
+
+    private async Task NewRound()
+    {
+        if (_table != null)
+        {
+            _round = new Round
+            {
+                Sums = SumService.FullTable(_table ?? 0) // _table!
+            };
+        }
+    }
+
+}

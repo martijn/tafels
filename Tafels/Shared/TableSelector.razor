@@ -17,18 +17,29 @@
     [Parameter]
     public EventCallback<List<int>> OnChange { get; set; }
 
+    [Parameter]
+    public bool Single { get; set; }
+
     void Toggle(int table)
     {
-        if (_selectedTables.Contains(table))
+        if (Single)
         {
-            _selectedTables.Remove(table);
+            _selectedTables = new List<int> {table};
         }
         else
         {
-            _selectedTables.Add(table);
+            if (_selectedTables.Contains(table))
+            {
+                _selectedTables.Remove(table);
+            }
+            else
+            {
+                _selectedTables.Add(table);
+            }
+
+            _selectedTables.Sort();
         }
 
-        _selectedTables.Sort();
         OnChange.InvokeAsync(_selectedTables);
     }
 

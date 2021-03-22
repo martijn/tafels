@@ -4,7 +4,7 @@
     <span>@Sum.B</span>
     <span class="o">=</span>
     <span>
-        <input type="text" inputmode="numeric" class="input is-large @InputClass" @bind="Sum.UserAnswer" @ref="_input" />
+        <input type="text" inputmode="numeric" class="input is-large @InputClass" @bind="Sum.UserAnswer" @ref="_input"/>
     </span>
 </p>
 
@@ -15,9 +15,9 @@
 
     [Parameter]
     public Sum Sum { get; set; }
-    
+
     private ElementReference _input;
-    
+
     private string InputClass =>
         ShowResult && Sum.Correct ? "is-success" : "";
 
@@ -25,4 +25,5 @@
     {
         await _input.FocusAsync();
     }
+
 }

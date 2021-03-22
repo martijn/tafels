@@ -1,7 +1,11 @@
 @page "/Mixed"
 @inject SumService SumService
 
-<NavLink class="button is-pulled-right" href="/"><span class="icon"><Icon Name="IconName.Home" /></span></NavLink>
+<NavLink class="button is-pulled-right" href="/">
+    <span class="icon">
+        <Icon Name="IconName.Home"/>
+    </span>
+</NavLink>
 
 <h1 class="title">Tafels door elkaar</h1>
 
@@ -33,9 +37,12 @@ else
         {
             <span>De tafels van @string.Join(" en ", _tables) door elkaar</span>
         }
-
-        <Quiz @key="@_round" Round="@_round" Done="@QuizDone" Check="@(_ => _round.ShowResults = true)"/>
     </p>
+
+    <Quiz @key="@_round" Round="@_round" Check="@(_ => _round.ShowResults = true)">
+        <p class="notification is-success is-light">Goed gedaan! Klik op de groene knop om door te gaan!</p>
+        <button class="button is-large is-success" @onclick="QuizDone">Volgende ronde</button>
+    </Quiz>
 }
 
 @code {
@@ -59,7 +66,7 @@ else
     {
         _round = new Round
         {
-            Sums = SumService.Generate(5, _tables)
+            Sums = SumService.Random(5, _tables)
         };
         _inGame = true;
     }

@@ -6,7 +6,7 @@
     }
     else
     {
-        <QuizSum @key="sum" Sum="@sum" ShowResult="@Round.ShowResults"  />
+        <QuizSum @key="sum" Sum="@sum" ShowResult="@Round.ShowResults"/>
     }
 }
 
@@ -14,8 +14,7 @@
 {
     @if (Round.Completed)
     {
-        <p class="notification is-success is-light">Goed gedaan! Klik op de groene knop om door te gaan!</p>
-        <button class="button is-large is-success" @onclick="Done">Volgende ronde</button>
+        @ChildContent
     }
     else
     {
@@ -34,10 +33,11 @@ else
     public EventCallback Check { get; set; }
 
     [Parameter]
-    public EventCallback Done { get; set; }
+    public Round Round { get; set; }
 
     [Parameter]
-    public Round Round { get; set; }
+    public RenderFragment ChildContent { get; set; }
+
 
     private QuizSum _firstSum;
 
@@ -46,4 +46,5 @@ else
         if (firstRender && !Round.Completed && _firstSum is not null)
             await _firstSum.Focus();
     }
+
 }
