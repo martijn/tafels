@@ -9,6 +9,7 @@
 
 <h1 class="title">Tafels door elkaar</h1>
 
+
 @if (_inGame == false)
 {
     <p class="subtitle">Welke tafels wil je oefenen?</p>
@@ -38,6 +39,8 @@ else
             <span>De tafels van @string.Join(" en ", _tables) door elkaar</span>
         }
     </p>
+    
+    <p>Jouw score: <strong class="is-size-4">@_score</strong> sommen goed gemaakt!</p>
 
     <Quiz @key="@_round" Round="@_round" Check="@(_ => _round.ShowResults = true)">
         <p class="notification is-success is-light">Goed gedaan! Klik op de groene knop om door te gaan!</p>
@@ -48,6 +51,7 @@ else
 @code {
     private List<int> _tables = new();
     private bool _inGame;
+    private int _score = 0;
 
     private Round _round;
 
@@ -59,6 +63,7 @@ else
     void QuizDone()
     {
         _round.ShowResults = false;
+        _score += 5;
         StartGame();
     }
 
