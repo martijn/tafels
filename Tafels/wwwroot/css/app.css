@@ -10,19 +10,24 @@
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
 
-    
-    footer {
-        color: gray;
-        font-size: .75em;
+@media only screen and (max-width: 1024px) {
+    #app > section:first-child {
+        padding-top: 1.5rem;
     }
-    
-    footer a {
-        color: lightsteelblue;
-    }
+}
+
+footer {
+    color: gray;
+    font-size: .75em;
+}
+
+footer a {
+    color: lightsteelblue;
+}

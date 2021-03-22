@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tafels.Models
 {
@@ -6,5 +7,7 @@ namespace Tafels.Models
     {
         public List<Sum> Sums { get; set; }
         public bool ShowResults { get; set; }
+
+        public bool Completed => Sums.All(s => s.Correct);
     }
 }

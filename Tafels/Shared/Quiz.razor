@@ -1,19 +1,26 @@
 @foreach (var sum in Round.Sums)
 {
-    <QuizSum Sum="@sum" ShowResult="@Round.ShowResults"/>
+    @if (sum == Round.Sums.FirstOrDefault(s => !s.Correct))
+    {
+        <QuizSum @key="sum" Sum="@sum" ShowResult="@Round.ShowResults" @ref="_firstSum"/>
+    }
+    else
+    {
+        <QuizSum @key="sum" Sum="@sum" ShowResult="@Round.ShowResults"  />
+    }
 }
 
 @if (Round.ShowResults)
 {
-    @if (Round.Sums.Any(s => !s.Correct))
-    {
-        <p class="notification">Bijna goed, verbeter je fouten om door te gaan!</p>
-        <button class="button is-large is-link" @onclick="Check">Controleren</button>
-    }
-    else
+    @if (Round.Completed)
     {
         <p class="notification is-success is-light">Goed gedaan! Klik op de groene knop om door te gaan!</p>
         <button class="button is-large is-success" @onclick="Done">Volgende ronde</button>
+    }
+    else
+    {
+        <p class="notification">Bijna goed, verbeter je fouten om door te gaan!</p>
+        <button class="button is-large is-link" @onclick="Check">Controleren</button>
     }
 }
 else
@@ -32,4 +39,11 @@ else
     [Parameter]
     public Round Round { get; set; }
 
+    private QuizSum _firstSum;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !Round.Completed && _firstSum is not null)
+            await _firstSum.Focus();
+    }
 }
