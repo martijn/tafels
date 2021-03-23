@@ -21,7 +21,7 @@ namespace Tafels.Services
                 var tries = 0;
                 do
                 {
-                    sum = new Sum {A = _rand.Next(1, 10), B = tables[_rand.Next(tables.Count)]};
+                    sum = (_rand.Next(1, 10), tables[_rand.Next(tables.Count)]);
                 } while (_history.Contains((sum.A, sum.B)) && ++tries < 3);
 
                 sums.Add(sum);
@@ -34,7 +34,7 @@ namespace Tafels.Services
 
         public void RemoveFromHistory(Sum sum)
         {
-            var newHistory = _history.Where(s => s != (sum.A, sum.B) && s != (sum.B, sum.A)).ToList();
+            var newHistory = _history.Where(s => sum.EqualTo(s)).ToList();
 
             _history.Clear();
 
@@ -44,12 +44,13 @@ namespace Tafels.Services
 
         public static List<Sum> FullTable(int number)
         {
-            return Enumerable.Range(1, 10).Select(a => new Sum {A = a, B = number}).ToList();
+            return Enumerable.Range(1, 10).Select(a => (Sum)(a, number)).ToList();
         }
 
         private void FlushHistory(int keep)
         {
             _history.Clear();
         }
+
     }
 }
