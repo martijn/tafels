@@ -4,7 +4,7 @@
     <span>@Sum.B</span>
     <span class="o">=</span>
     <span>
-        <input type="text" inputmode="numeric" class="input is-large @InputClass" @bind="Sum.UserAnswer" @ref="_input"/>
+        <input type="text" inputmode="numeric" class="input is-large @InputClass" @oninput="Change" @ref="_input"/>
     </span>
 </p>
 
@@ -16,10 +16,21 @@
     [Parameter]
     public Sum Sum { get; set; }
 
+    [Parameter]
+    public EventCallback onchange { get; set; }
+
     private ElementReference _input;
 
     private string InputClass =>
         ShowResult && Sum.Correct ? "is-success" : "";
+
+    private async Task Change(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value.ToString(), out var newValue))
+            Sum.UserAnswer = newValue;
+        
+        await onchange.InvokeAsync();
+    }
 
     public async Task Focus()
     {

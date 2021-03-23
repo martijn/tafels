@@ -1,14 +1,13 @@
 @using BlafettisLib
-
 @foreach (var sum in Round.Sums)
 {
     @if (sum == Round.Sums.FirstOrDefault(s => !s.Correct))
     {
-        <QuizSum @key="sum" Sum="@sum" ShowResult="@Round.ShowResults" @ref="_firstSum"/>
+        <QuizSum @key="sum" Sum="@sum" onchange="@SumChange" ShowResult="@Round.ShowResults" @ref="_firstSum"/>
     }
     else
     {
-        <QuizSum @key="sum" Sum="@sum" ShowResult="@Round.ShowResults"/>
+        <QuizSum @key="sum" Sum="@sum" onchange="@SumChange" ShowResult="@Round.ShowResults"/>
     }
 }
 
@@ -47,6 +46,12 @@ else
     private Blafettis Blafettis;
     private QuizSum _firstSum;
 
+    private async Task SumChange()
+    {
+        // If user is correcting mistakes, show feedback immediately
+        if (Round.ShowResults) await Check.InvokeAsync();
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && !Round.Completed && _firstSum is not null)
@@ -54,8 +59,8 @@ else
 
         if (Round.ShowResults && !Round.Completed)
             Round.MistakesWereMade = true; // TODO Lift into class?
-        
-        if (Round.Completed && !Round.MistakesWereMade && !_confettiFired)
+
+        if (Round.ShowResults && Round.Completed && !Round.MistakesWereMade && !_confettiFired)
         {
             _confettiFired = true;
             Blafettis.RaiseConfetti();
