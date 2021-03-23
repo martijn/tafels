@@ -49,7 +49,8 @@ namespace Tafels.Services
 
         private void FlushHistory(int keep)
         {
-            _history.Clear();
+            while (_history.Count > keep)
+                _history.Dequeue();
         }
 
     }
