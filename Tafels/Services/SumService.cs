@@ -34,7 +34,7 @@ namespace Tafels.Services
 
         public void RemoveFromHistory(Sum sum)
         {
-            var newHistory = _history.Where(s => sum.EqualTo(s)).ToList();
+            var newHistory = _history.Where(s => !sum.EqualTo(s)).ToList();
 
             _history.Clear();
 
