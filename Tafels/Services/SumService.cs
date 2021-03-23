@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tafels.Models;
 
 namespace Tafels.Services
 {
     public class SumService
     {
-        private readonly Random _rand = new();
         private readonly Queue<(int, int)> _history = new();
+        private readonly Random _rand = new();
 
         public List<Sum> Random(int number, List<int> tables)
         {
@@ -31,19 +32,24 @@ namespace Tafels.Services
             return sums;
         }
 
+        public void RemoveFromHistory(Sum sum)
+        {
+            var newHistory = _history.Where(s => s != (sum.A, sum.B) && s != (sum.B, sum.A)).ToList();
+
+            _history.Clear();
+
+            foreach (var s in newHistory)
+                _history.Enqueue(s);
+        }
+
         public static List<Sum> FullTable(int number)
         {
-            var sums = new List<Sum>();
-
-            for (var i = 1; i < 11; i++) sums.Add(new Sum {A = i, B = number});
-
-            return sums;
+            return Enumerable.Range(1, 10).Select(a => new Sum {A = a, B = number}).ToList();
         }
 
         private void FlushHistory(int keep)
         {
-            while (_history.Count > keep)
-                _history.Dequeue();
+            _history.Clear();
         }
     }
 }

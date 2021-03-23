@@ -9,7 +9,6 @@
 
 <h1 class="title">Tafels door elkaar</h1>
 
-
 @if (_inGame == false)
 {
     <p class="subtitle">Welke tafels wil je oefenen?</p>
@@ -39,10 +38,10 @@ else
             <span>De tafels van @string.Join(" en ", _tables) door elkaar</span>
         }
     </p>
-    
+
     <p>Jouw score: <strong class="is-size-4">@_score</strong> sommen goed gemaakt!</p>
 
-    <Quiz @key="@_round" Round="@_round" Check="@(_ => _round.ShowResults = true)">
+    <Quiz @key="@_round" Round="@_round" Check="@Check">
         <p class="notification is-success is-light">Goed gedaan! Klik op de groene knop om door te gaan!</p>
         <button class="button is-large is-success" @onclick="QuizDone">Volgende ronde</button>
     </Quiz>
@@ -58,6 +57,16 @@ else
     void TablesChanged(List<int> tables)
     {
         _tables = tables;
+    }
+
+    void Check()
+    {
+    // Remove incorrect answered sums from history so they will have a higher
+    // chance of recurring in the next round
+        foreach (var sum in _round.Sums.Where(sum => !sum.Correct))
+            SumService.RemoveFromHistory(sum);
+
+        _round.ShowResults = true;
     }
 
     void QuizDone()
