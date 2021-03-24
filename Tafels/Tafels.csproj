@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Blazor-Analytics" Version="3.3.0" />
         <PackageReference Include="blazor-dom-confetti" Version="0.0.0.4" />
         <PackageReference Include="Blazorise.Bulma" Version="0.9.3.1" />
         <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3.1" />
