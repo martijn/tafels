@@ -1,5 +1,7 @@
 @page "/Mixed"
+
 @inject SumService SumService
+@inject IAnalytics Analytics
 
 <NavLink class="button is-pulled-right" href="/">
     <span class="icon">
@@ -78,6 +80,8 @@ else
 
     private void StartGame()
     {
+        Analytics.TrackEvent("Mixed.StartGame");
+
         _round = new Round
         {
             Sums = SumService.Random(5, _tables)

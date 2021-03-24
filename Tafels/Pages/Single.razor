@@ -1,5 +1,7 @@
 @page "/Single"
 
+@inject IAnalytics Analytics
+
 <NavLink class="button is-pulled-right" href="/">
     <span class="icon">
         <Icon Name="IconName.Home"/>
@@ -34,6 +36,8 @@
 
     private async Task NewRound()
     {
+        Analytics.TrackEvent("Single.NewRound");
+
         if (_table != null)
         {
             _round = new Round
