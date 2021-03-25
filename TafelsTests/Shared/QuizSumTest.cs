@@ -5,7 +5,7 @@ using Xunit;
 
 namespace TafelsTests.Shared
 {
-    public class SumTest : TestContext
+    public class QuizSumTest : TestContext
     {
         [Fact]
         public void SuccessStatus()
