@@ -28,7 +28,7 @@
     {
         if (int.TryParse(e.Value.ToString(), out var newValue))
             Sum.UserAnswer = newValue;
-        
+
         await onchange.InvokeAsync();
     }
 

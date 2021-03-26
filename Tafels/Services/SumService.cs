@@ -44,7 +44,7 @@ namespace Tafels.Services
 
         public static List<Sum> FullTable(int number)
         {
-            return Enumerable.Range(1, 10).Select(a => (Sum)(a, number)).ToList();
+            return Enumerable.Range(1, 10).Select(a => (Sum) (a, number)).ToList();
         }
 
         private void FlushHistory(int keep)
@@ -52,6 +52,5 @@ namespace Tafels.Services
             while (_history.Count > keep)
                 _history.Dequeue();
         }
-
     }
 }

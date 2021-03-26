@@ -21,13 +21,15 @@
     }
     else
     {
-        <p class="notification">Bijna goed, verbeter je fouten om door te gaan!</p>
-        <button class="button is-large is-link" @onclick="Check">Controleren</button>
+        <Alert Visible="true">
+            <AlertMessage>Bijna goed, verbeter je fouten om door te gaan!</AlertMessage>
+        </Alert>
+        <Button Size="Size.Large" Color="Color.Link" Clicked="Check">Controleren</Button>
     }
 }
 else
 {
-    <button class="button is-large is-link" @onclick="Check">Controleren</button>
+    <Button Size="Size.Large" Color="Color.Link" Clicked="Check">Controleren</Button>
 }
 
 @code {
@@ -48,7 +50,7 @@ else
 
     private async Task SumChange()
     {
-        // If user is correcting mistakes, show feedback immediately
+    // If user is correcting mistakes, show feedback immediately
         if (Round.ShowResults) await Check.InvokeAsync();
     }
 

@@ -19,8 +19,11 @@
     <h2 class="title">De tafel van @_table</h2>
 
     <Quiz @key="@_round" Round="@_round" Check="@(_ => _round.ShowResults = true)">
-        <p class="notification is-success is-light">Helemaal goed. Kies de volgende tafel of begin opnieuw!</p>
-        <button class="button is-large is-success" @onclick="NewRound">Opnieuw</button>
+        <Alert Color="Color.Success" Visible="true" Class="is-light">
+            <AlertMessage>Helemaal goed!</AlertMessage>
+            <AlertDescription>Kies de volgende tafel of begin opnieuw.</AlertDescription>
+        </Alert>
+        <Button Color="Color.Success" Size="Size.Large" Clicked="NewRound">Volgende ronde</Button>
     </Quiz>
 }
 
@@ -36,8 +39,6 @@
 
     private async Task NewRound()
     {
-        Analytics.TrackEvent("Single.NewRound");
-
         if (_table != null)
         {
             _round = new Round
@@ -45,6 +46,8 @@
                 Sums = SumService.FullTable(_table ?? 0) // _table!
             };
         }
+
+        await Analytics.TrackEvent("Single.NewRound");
     }
 
 }
