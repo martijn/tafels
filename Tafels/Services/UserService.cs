@@ -30,23 +30,18 @@ namespace Tafels.Services
             await _localStorage.SetItemAsync("activeUser", user.Name);
         }
 
-        public async Task<User> RegisterNewUser(string name)
-        {
-            var user = new User {Name = name};
-            await UpdateUser(user);
-            await SetActiveUser(user);
-            return user;
-        }
+        public async Task<User> RegisterNewUser(string name) =>
+            await UpdateUser(new User {Name = name});
 
-        public async Task<List<User>> GetUsers()
-        {
-            return await _localStorage.GetItemAsync<List<User>>("users") ?? new List<User>();
-        }
+        public async Task<List<User>> GetUsers() =>
+            await _localStorage.GetItemAsync<List<User>>("users") ?? new List<User>();
 
-        public async Task UpdateUser(User user)
+        public async Task<User> UpdateUser(User user)
         {
             var users = await GetUsers();
             await _localStorage.SetItemAsync("users", users.Where(u => u.Name != user.Name).Append(user).ToList());
+            await SetActiveUser(user);
+            return user;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 @if (_activeUser is null && _users is not { Count: > 0})
 {
-    <Button Clicked="@(_ => _signupModal.Show())">
+    <Button Clicked="@ShowModal">
         <span class="icon">
             <Icon Name="IconName.User"/>
         </span>
@@ -34,7 +34,7 @@ else
                 }
                 <DropdownDivider/>
             }
-            <DropdownItem Clicked="@(_ => _signupModal.Show())">Nieuwe gebruiker...</DropdownItem>
+            <DropdownItem Clicked="@ShowModal">Nieuwe gebruiker...</DropdownItem>
         </DropdownMenu>
     </Dropdown>
 }
@@ -74,21 +74,13 @@ else
         await Refresh();
     }
 
-    private void Seed()
-    {
-        _signupModal.Show();
-    /*
-        await UserService.RegisterNewUser("Noah");
-        _activeUser = await UserService.RegisterNewUser("Martijn");
-        _users = await UserService.GetUsers();
-        */
-    }
-
     private async Task Activate(User user)
     {
         await UserService.SetActiveUser(user);
         await Refresh();
     }
+
+    private void ShowModal() => _signupModal.Show();
 
     private async Task SignUp()
     {
