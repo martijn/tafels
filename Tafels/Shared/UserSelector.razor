@@ -1,0 +1,107 @@
+@inject UserService UserService
+
+@if (_activeUser is null && _users is not { Count: > 0})
+{
+    <Button Clicked="@(_ => _signupModal.Show())">
+        <span class="icon">
+            <Icon Name="IconName.User"/>
+        </span>
+        <span>Aanmelden</span>
+    </Button>
+}
+else
+{
+    <Dropdown>
+        <DropdownToggle>
+            <span class="icon">
+                <Icon Name="IconName.User"/>
+            </span>
+            @if (_activeUser is null)
+            {
+                <span>Bezoeker</span>
+            }
+            else
+            {
+                <span>@_activeUser.Name</span>
+            }
+        </DropdownToggle>
+        <DropdownMenu>
+            @if (_users is { Count: > 0})
+            {
+                @foreach (var user in _users)
+                {
+                    <DropdownItem Clicked="@(_ => Activate(user))">@user.Name</DropdownItem>
+                }
+                <DropdownDivider/>
+            }
+            <DropdownItem Clicked="@(_ => _signupModal.Show())">Nieuwe gebruiker...</DropdownItem>
+        </DropdownMenu>
+    </Dropdown>
+}
+
+<Modal @ref="_signupModal">
+    <ModalContent>
+        <ModalHeader>
+            <ModalTitle>
+                Nieuwe gebruiker
+            </ModalTitle>
+            <CloseButton/>
+        </ModalHeader>
+        <ModalBody>
+            <Field>
+                <FieldLabel>Wat is je naam?</FieldLabel>
+                <TextEdit Autofocus="true" @bind-Text="_signupName" KeyUp="@(e => e.Code == "Enter" ? SignUp() : null)"/>
+            </Field>
+            <p class="is-size-7 has-text-grey">
+                Je gegevens worden opgeslagen op je eigen apparaat en niet over het internet verzonden.
+            </p>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Primary" Clicked="@SignUp">Opslaan</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    private User _activeUser;
+    private List<User> _users;
+
+    private Modal _signupModal;
+    private string _signupName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+    }
+
+    private void Seed()
+    {
+        _signupModal.Show();
+    /*
+        await UserService.RegisterNewUser("Noah");
+        _activeUser = await UserService.RegisterNewUser("Martijn");
+        _users = await UserService.GetUsers();
+        */
+    }
+
+    private async Task Activate(User user)
+    {
+        await UserService.SetActiveUser(user);
+        await Refresh();
+    }
+
+    private async Task SignUp()
+    {
+        await UserService.RegisterNewUser(_signupName);
+        await Refresh();
+        _signupModal.Hide();
+        _signupName = "";
+    }
+
+    private async Task Refresh()
+    {
+        _activeUser = await UserService.GetActiveUser();
+        _users = await UserService.GetUsers();
+    }
+
+}
