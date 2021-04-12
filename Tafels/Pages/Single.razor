@@ -1,6 +1,7 @@
 @page "/Single"
 
 @inject IAnalytics Analytics
+@inject UserService UserService
 
 <h1 class="title">Eén tafel</h1>
 
@@ -33,6 +34,8 @@
 
     private async Task NewRound()
     {
+        if (_round?.Completed ?? false) UserService.AddStars(1);
+
         if (_table != null)
         {
             _round = new Round

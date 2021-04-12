@@ -33,7 +33,7 @@ namespace Tafels
             builder.Services.AddGoogleAnalytics("G-0902DWVXZ3");
 #endif
             builder.Services.AddSingleton<SumService>();
-            builder.Services.AddTransient<UserService>();
+            builder.Services.AddScoped<UserService>();
             builder.Services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();

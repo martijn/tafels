@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
+using Microsoft.Extensions.Logging;
 using Tafels.Models;
 
 namespace Tafels.Services
@@ -9,11 +11,15 @@ namespace Tafels.Services
     public class UserService
     {
         private readonly ILocalStorageService _localStorage;
+        private readonly ILogger<UserService> _logger;
 
-        public UserService(ILocalStorageService localStorage)
+        public UserService(ILocalStorageService localStorage, ILogger<UserService> logger)
         {
             _localStorage = localStorage;
+            _logger = logger;
         }
+
+        public event Action UsersUpdated;
 
         public async Task<User> GetActiveUser()
         {
@@ -30,18 +36,32 @@ namespace Tafels.Services
             await _localStorage.SetItemAsync("activeUser", user.Name);
         }
 
-        public async Task<User> RegisterNewUser(string name) =>
-            await UpdateUser(new User {Name = name});
+        public async Task<User> RegisterNewUser(string name)
+        {
+            return await UpdateUser(new User {Name = name});
+        }
 
-        public async Task<List<User>> GetUsers() =>
-            await _localStorage.GetItemAsync<List<User>>("users") ?? new List<User>();
+        public async Task<List<User>> GetUsers()
+        {
+            return await _localStorage.GetItemAsync<List<User>>("users") ?? new List<User>();
+        }
 
         public async Task<User> UpdateUser(User user)
         {
             var users = await GetUsers();
             await _localStorage.SetItemAsync("users", users.Where(u => u.Name != user.Name).Append(user).ToList());
             await SetActiveUser(user);
+            UsersUpdated?.Invoke();
             return user;
+        }
+
+        public async Task AddStars(int i)
+        {
+            var activeUser = await GetActiveUser();
+
+            activeUser.Stars += 1;
+
+            await UpdateUser(activeUser);
         }
     }
 }

@@ -1,3 +1,4 @@
+@inject NavigationManager NavigationManager
 @inject UserService UserService
 
 @if (_activeUser is null && _users is not { Count: > 0})
@@ -22,7 +23,12 @@ else
             }
             else
             {
-                <span>@_activeUser.Name</span>
+                <span>
+                    @_activeUser.Name
+                    <span class="tag is-warning">
+                        @_activeUser.Stars ★
+                    </span>
+                </span>
             }
         </DropdownToggle>
         <DropdownMenu>
@@ -71,6 +77,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        UserService.UsersUpdated += () => Refresh();
         await Refresh();
     }
 
@@ -78,9 +85,13 @@ else
     {
         await UserService.SetActiveUser(user);
         await Refresh();
+        NavigationManager.NavigateTo("/");
     }
 
-    private void ShowModal() => _signupModal.Show();
+    private void ShowModal()
+    {
+        _signupModal.Show();
+    }
 
     private async Task SignUp()
     {
@@ -94,6 +105,7 @@ else
     {
         _activeUser = await UserService.GetActiveUser();
         _users = await UserService.GetUsers();
+        StateHasChanged();
     }
 
 }
