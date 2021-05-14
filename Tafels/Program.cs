@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Blazor.Analytics;
+using Blazored.LocalStorage;
 using Blazorise;
 using Blazorise.Bulma;
 using Blazorise.Icons.FontAwesome;
@@ -32,6 +33,8 @@ namespace Tafels
             builder.Services.AddGoogleAnalytics("G-0902DWVXZ3");
 #endif
             builder.Services.AddSingleton<SumService>();
+            builder.Services.AddScoped<UserService>();
+            builder.Services.AddBlazoredLocalStorage();
 
             await builder.Build().RunAsync();
         }

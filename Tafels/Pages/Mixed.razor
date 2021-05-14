@@ -1,13 +1,8 @@
 @page "/Mixed"
 
 @inject SumService SumService
+@inject UserService UserService
 @inject IAnalytics Analytics
-
-<NavLink class="button is-pulled-right" href="/">
-    <span class="icon">
-        <Icon Name="IconName.Home"/>
-    </span>
-</NavLink>
 
 <h1 class="title">Tafels door elkaar</h1>
 
@@ -79,6 +74,8 @@ else
         _round.ShowResults = false;
         _score += 5;
         StartGame();
+
+        UserService.AddStars(1);
     }
 
     private void StartGame()
