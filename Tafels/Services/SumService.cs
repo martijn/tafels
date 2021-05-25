@@ -10,23 +10,25 @@ namespace Tafels.Services
         private readonly Queue<(int, int)> _history = new();
         private readonly Random _rand = new();
 
-        public List<Sum> Random(int number, List<int> tables)
+        public List<Sum> Random(int sumCount, List<int> tables)
         {
             var sums = new List<Sum>();
 
-            for (var i = 0; i < number; i++)
+            for (var i = 0; i < sumCount; i++)
             {
                 Sum sum;
 
                 var tries = 0;
                 do
                 {
-                    sum = (_rand.Next(1, 10), tables[_rand.Next(tables.Count)]);
-                } while (_history.Contains((sum.A, sum.B)) && ++tries < 3);
+                    sum = (_rand.Next(1, 11), tables[_rand.Next(tables.Count)]);
+                } while (_history.Contains((sum.A, sum.B)) && ++tries < sumCount); // try to be unique within the requested set
 
                 sums.Add(sum);
                 _history.Enqueue((sum.A, sum.B));
-                FlushHistory(number * 2);
+                
+                // If user is practicing 4 multiplication table, keep the last 40 sums in the history
+                FlushHistory(tables.Count * 10);
             }
 
             return sums;
