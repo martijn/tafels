@@ -69,13 +69,13 @@ else
         _round.ShowResults = true;
     }
 
-    void QuizDone()
+    private async Task QuizDone()
     {
         _round.ShowResults = false;
         _score += 5;
         StartGame();
 
-        UserService.AddStars(1);
+        await UserService.AddStars(1);
     }
 
     private void StartGame()

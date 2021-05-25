@@ -77,7 +77,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        UserService.UsersUpdated += () => Refresh();
+        UserService.UsersUpdated += async () => await Refresh();
         await Refresh();
     }
 
