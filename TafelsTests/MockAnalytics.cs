@@ -13,11 +13,13 @@ namespace TafelsTests
         {
         }
 
-        public async Task TrackEvent(string eventName, string eventCategory = null, string eventLabel = null, int? eventValue = null)
+        public async Task TrackEvent(string eventName, string eventCategory = null, string eventLabel = null,
+            int? eventValue = null)
         {
         }
 
-        public async Task TrackEvent(string eventName, int eventValue, string eventCategory = null, string eventLabel = null)
+        public async Task TrackEvent(string eventName, int eventValue, string eventCategory = null,
+            string eventLabel = null)
         {
         }
 

@@ -9,7 +9,7 @@ namespace TafelsTests.Models
         public void TestStarsDefault()
         {
             var user = new User();
-            
+
             Assert.Equal(0, user.Stars);
         }
     }
