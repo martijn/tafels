@@ -5,14 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blazor-Analytics" Version="3.4.0" />
-        <PackageReference Include="blazor-dom-confetti" Version="0.0.0.4" />
-        <PackageReference Include="Blazored.LocalStorage" Version="4.0.0" />
-        <PackageReference Include="Blazorise.Bulma" Version="0.9.3.6" />
-        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3.6" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-preview.3.21201.13" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0-preview.3.21201.13" PrivateAssets="all" />
-        <PackageReference Include="System.Net.Http.Json" Version="6.0.0-preview.3.21201.4" />
+        <PackageReference Include="Blazor-Analytics" Version="3.9.0" />
+        <PackageReference Include="blazor-dom-confetti" Version="0.0.0.5" />
+        <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
+        <PackageReference Include="Blazorise.Bulma" Version="0.9.4.3" />
+        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.4.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0-preview.7.21378.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0-preview.7.21378.6" PrivateAssets="all" />
+        <PackageReference Include="System.Net.Http.Json" Version="6.0.0-preview.7.21377.19" />
     </ItemGroup>
 
     <ItemGroup>

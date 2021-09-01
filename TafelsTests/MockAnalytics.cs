@@ -26,5 +26,13 @@ namespace TafelsTests
         public async Task TrackEvent(string eventName, object eventData)
         {
         }
+
+        public void Enable()
+        {
+        }
+
+        public void Disable()
+        {
+        }
     }
 }
