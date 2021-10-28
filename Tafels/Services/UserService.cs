@@ -63,6 +63,8 @@ namespace Tafels.Services
         {
             var activeUser = await GetActiveUser();
 
+            if (activeUser is null) return;
+            
             activeUser.Stars += 1;
 
             await UpdateUser(activeUser);
