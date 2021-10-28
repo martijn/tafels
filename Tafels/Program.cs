@@ -10,33 +10,32 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Tafels.Services;
 
-namespace Tafels
+namespace Tafels;
+
+public class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        public static async Task Main(string[] args)
-        {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.Services
-                .AddBlazorise(options => { options.ChangeTextOnKeyPress = true; })
-                .AddBulmaProviders()
-                .AddFontAwesomeIcons();
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.Services
+            .AddBlazorise(options => { options.ChangeTextOnKeyPress = true; })
+            .AddBulmaProviders()
+            .AddFontAwesomeIcons();
 
-            builder.RootComponents.Add<App>("#app");
+        builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(
-                sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
+        builder.Services.AddScoped(
+            sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 #if DEBUG
-            builder.Services.AddGoogleAnalytics("");
+        builder.Services.AddGoogleAnalytics("");
 #else
             builder.Services.AddGoogleAnalytics("G-0902DWVXZ3");
 #endif
-            builder.Services.AddSingleton<SumService>();
-            builder.Services.AddScoped<UserService>();
-            builder.Services.AddBlazoredLocalStorage();
+        builder.Services.AddSingleton<SumService>();
+        builder.Services.AddScoped<UserService>();
+        builder.Services.AddBlazoredLocalStorage();
 
-            await builder.Build().RunAsync();
-        }
+        await builder.Build().RunAsync();
     }
 }

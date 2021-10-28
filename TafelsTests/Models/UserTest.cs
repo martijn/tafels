@@ -1,16 +1,15 @@
 using Tafels.Models;
 using Xunit;
 
-namespace TafelsTests.Models
-{
-    public class UserTest
-    {
-        [Fact]
-        public void TestStarsDefault()
-        {
-            var user = new User();
+namespace TafelsTests.Models;
 
-            Assert.Equal(0, user.Stars);
-        }
+public class UserTest
+{
+    [Fact]
+    public void TestStarsDefault()
+    {
+        var user = new User();
+
+        Assert.Equal(0, user.Stars);
     }
 }
