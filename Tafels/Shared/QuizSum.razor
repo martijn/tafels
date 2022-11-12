@@ -17,7 +17,7 @@
     public Sum Sum { get; set; }
 
     [Parameter]
-    public EventCallback onchange { get; set; }
+    public EventCallback OnChange { get; set; }
 
     private ElementReference _input;
 
@@ -29,7 +29,7 @@
         if (int.TryParse(e.Value.ToString(), out var newValue))
             Sum.UserAnswer = newValue;
 
-        await onchange.InvokeAsync();
+        await OnChange.InvokeAsync();
     }
 
     public async Task Focus()

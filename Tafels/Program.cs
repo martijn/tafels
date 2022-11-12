@@ -18,7 +18,7 @@ public class Program
     {
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services
-            .AddBlazorise(options => { options.ChangeTextOnKeyPress = true; })
+            .AddBlazorise(options => { options.Immediate = true; })
             .AddBulmaProviders()
             .AddFontAwesomeIcons();
 

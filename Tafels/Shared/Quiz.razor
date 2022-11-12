@@ -3,11 +3,11 @@
 {
     @if (sum == Round.Sums.FirstOrDefault(s => !s.Correct))
     {
-        <QuizSum @key="sum" Sum="@sum" onchange="@SumChange" ShowResult="@Round.ShowResults" @ref="_firstSum"/>
+        <QuizSum @key="sum" Sum="@sum" OnChange="@SumChange" ShowResult="@Round.ShowResults" @ref="_firstSum"/>
     }
     else
     {
-        <QuizSum @key="sum" Sum="@sum" onchange="@SumChange" ShowResult="@Round.ShowResults"/>
+        <QuizSum @key="sum" Sum="@sum" OnChange="@SumChange" ShowResult="@Round.ShowResults"/>
     }
 }
 

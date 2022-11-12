@@ -1,29 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
 
         <IsPackable>false</IsPackable>
+
+        <LangVersion>11</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blazored.LocalStorage.TestExtensions" Version="4.1.5"/>
-        <PackageReference Include="bunit.web" Version="1.3.35-preview"/>
-        <PackageReference Include="bunit.xunit" Version="1.0.0-preview-02"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0"/>
-        <PackageReference Include="xunit" Version="2.4.2-pre.12"/>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+        <PackageReference Include="Blazored.LocalStorage.TestExtensions" Version="4.3.0" />
+        <PackageReference Include="bunit.web" Version="1.12.6" />
+        <PackageReference Include="bunit.xunit" Version="1.0.0-preview-02" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
+        <PackageReference Include="xunit" Version="2.4.2" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="coverlet.collector" Version="3.1.0">
+        <PackageReference Include="coverlet.collector" Version="3.2.0">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Tafels\Tafels.csproj"/>
+        <ProjectReference Include="..\Tafels\Tafels.csproj" />
     </ItemGroup>
 
 </Project>

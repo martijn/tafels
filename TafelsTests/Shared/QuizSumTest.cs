@@ -16,7 +16,7 @@ public class QuizSumTest : TestContext
             parameters => parameters
                 .Add(p => p.ShowResult, false)
                 .Add(p => p.Sum, sum)
-                .Add(p => p.onchange, () => { })
+                .Add(p => p.OnChange, () => { })
         );
 
         var spanA = cut.Find("span:nth-child(1)");

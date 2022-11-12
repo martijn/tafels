@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blazor.Analytics;
 
@@ -6,6 +7,14 @@ namespace TafelsTests;
 public class MockAnalytics : IAnalytics
 {
     public async Task Initialize(string trackingId)
+    {
+    }
+
+    public async Task ConfigureGlobalConfigData(Dictionary<string, object> globalConfigData)
+    {
+    }
+
+    public async Task ConfigureGlobalEventData(Dictionary<string, object> globalEventData)
     {
     }
 
