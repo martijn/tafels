@@ -1,16 +1,31 @@
 ﻿@inherits LayoutComponentBase
 
-<section class="section is-pulled-right">
-    <UserSelector/>
-    <Button Type="ButtonType.Link" To="/">
-        <span class="icon">
-            <Icon Name="IconName.Home"/>
-        </span>
-    </Button>
-</section>
+<header class="container mt-5">
+    <Div Flex="Flex.Wrap.OnMobile.JustifyContent.Between.OnTablet">
+        <Div Flex="Flex.Order.Is1.Order.Is0.OnTablet" class="section pt-5">
+            <h1 class="title">
+                Tafels oefenen op <a href="https://tafels.storck.io/">tafels.storck.io</a>
+            </h1>
 
-<section class="section">
-    <div class="container">
+            <p class="subtitle">
+                Oefen de tafels van 1 t/m 12 in je eigen tempo!
+            </p>
+        </Div>
+
+        <Div Flex="Flex.Order.Is0.Order.Is1.OnTablet" class="section pt-5 pb-0 has-text-right">
+            <UserSelector />
+            <Button Type="ButtonType.Link" To="/">
+                <span class="icon">
+                    <Icon Name="IconName.Home" />
+                </span>
+                <span>Terug naar begin</span>
+            </Button>
+        </Div>
+    </Div>
+</header>
+
+<section class="section pt-0">
+    <div class="container has-text-centered">
         @Body
     </div>
 </section>

@@ -1,31 +1,23 @@
 ﻿@page "/"
 
-<h1 class="title">
-    Tafels oefenen
-</h1>
-<p class="subtitle">
-    Oefen de tafels van 1 t/m 12 in je eigen tempo!
-</p>
-
-<h2 class="title mt-5">
+<h2 class="title">
     Wat wil je doen?
 </h2>
 
-<Buttons Size="Size.Large">
-    <Button Type="ButtonType.Link" To="/Mixed">
+<div class="mb-5">
+    <Button Type="ButtonType.Link" Size="Size.Large" To="/Mixed">
         Tafels door elkaar
     </Button>
-    <Button Type="ButtonType.Link" To="/Single">
+    <Button Type="ButtonType.Link" Size="Size.Large" To="/Single">
         Eén tafel op volgorde
     </Button>
-</Buttons>
+</div>
 
 <footer>
     <p>
         © Martijn Storck
-        &lt;<a href="mailto:martijn@storck.io">martijn@storck.io</a>&gt;
-    </p>
-    <p>
-        Gemaakt met Blazor WebAssembly (ASP.NET Core) <a href="https://github.com/martijn/tafels/tree/main/Tafels">Source op GitHub</a>
+        &lt;<a href="mailto:martijn@storck.io">martijn@storck.io</a>&gt;<br/>
+        Powered by .NET 7 & Blazor WebAssembly<br />
+        <a href="https://github.com/martijn/tafels/tree/main/Tafels">Source op GitHub</a>
     </p>
 </footer>
