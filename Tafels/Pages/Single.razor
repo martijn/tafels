@@ -1,6 +1,5 @@
 @page "/Single"
 
-@inject IAnalytics Analytics
 @inject UserService UserService
 
 <h1 class="title">Eén tafel, op volgorde</h1>
@@ -43,8 +42,6 @@
                 Sums = SumService.FullTable(_table ?? 0) // _table!
             };
         }
-
-        await Analytics.TrackEvent("Single.NewRound");
     }
 
 }

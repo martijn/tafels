@@ -12,7 +12,7 @@ public class UserServiceTest : TestContext
     public UserServiceTest()
     {
         var localStorage = this.AddBlazoredLocalStorage();
-        _userService = new UserService(localStorage, null, new MockAnalytics());
+        _userService = new UserService(localStorage, null);
     }
 
     [Fact]

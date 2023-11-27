@@ -2,7 +2,6 @@
 
 @inject SumService SumService
 @inject UserService UserService
-@inject IAnalytics Analytics
 
 <h1 class="title">Tafels door elkaar</h1>
 
@@ -80,8 +79,6 @@ else
 
     private void StartGame()
     {
-        Analytics.TrackEvent("Mixed.StartGame");
-
         _round = new Round
         {
             Sums = SumService.Random(5, _tables)

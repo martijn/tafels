@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Blazor.Analytics;
 using Blazored.LocalStorage;
 using Microsoft.Extensions.Logging;
 using Tafels.Models;
@@ -11,15 +10,13 @@ namespace Tafels.Services;
 
 public class UserService
 {
-    private readonly IAnalytics _analytics;
     private readonly ILocalStorageService _localStorage;
     private readonly ILogger<UserService> _logger;
 
-    public UserService(ILocalStorageService localStorage, ILogger<UserService> logger, IAnalytics analytics)
+    public UserService(ILocalStorageService localStorage, ILogger<UserService> logger)
     {
         _localStorage = localStorage;
         _logger = logger;
-        _analytics = analytics;
     }
 
     public event Action UsersUpdated;
@@ -41,7 +38,6 @@ public class UserService
 
     public async Task<User> RegisterNewUser(string name)
     {
-        await _analytics.TrackEvent("UserService.RegisterNewUser");
         return await UpdateUser(new User { Name = name });
     }
 
